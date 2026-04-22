@@ -46,7 +46,7 @@
             font-size: 1.5rem; font-weight: 500;
         }
 
-        .content-wrapper { display: flex; flex-direction: row !important; flex-grow: 1; margin-top: var(--line-height); width: 100%; }
+        .content-wrapper { display: flex; flex-direction: row !important; flex-grow: 1; margin-top: var(--line-height); }
 
         nav { width: var(--left-margin-ratio); flex-shrink: 0; }
         .nav-links { list-style: none; padding: 0; margin: 0; width: 100%; }
@@ -69,20 +69,35 @@
         article { display: none; width: 100%; }
         article.active { display: block; }
 
+        /* --- Experiencia 정렬 핵심 수정 --- */
+        #exp p, #exp .resume-header {
+            margin: 0 !important; 
+            padding: 0 !important;
+            height: var(--line-height) !important; 
+            min-height: var(--line-height) !important;
+            max-height: var(--line-height) !important;
+            display: flex !important; 
+            align-items: center !important; 
+            font-size: 1rem; font-weight: 300;
+            line-height: 1 !important; /* 텍스트가 칸 중앙에 오도록 고정 */
+            box-sizing: border-box;
+            overflow: visible;
+        }
+        
+        /* 공통 스타일 유지 */
         p, .resume-header {
             margin: 0; padding: 0;
-            min-height: var(--line-height); 
+            height: var(--line-height); 
             display: flex; align-items: center; 
             font-size: 1rem; font-weight: 300;
             line-height: var(--line-height);
-            word-break: break-word; 
         }
         
         .period-text { color: var(--period-color); margin-left: 10px; font-size: 0.9rem; }
         .period-text-sm { color: var(--period-color); margin-left: 6px; font-size: 0.85rem; }
-        .bullet-point { padding-left: 15px; position: relative; display: block; }
+        .bullet-point { padding-left: 15px; position: relative; display: flex; align-items: center; }
         .bullet-point::before { content: "•"; position: absolute; left: 0; color: #aaa; }
-        .skip-line { height: var(--line-height); width: 100%; }
+        .skip-line { height: var(--line-height); width: 100%; display: block; }
 
         .works-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding-top: 15px; }
         .work-item { cursor: pointer; transition: transform 0.2s; }
@@ -108,7 +123,7 @@
         @media (max-width: 768px) {
             :root { --left-margin-ratio: 30%; }
             .modal-window { width: 90%; padding: 25px 25px; }
-            .modal-work-title { font-size: 1.1rem; }
+            .main-title { font-size: 1.2rem; }
             p, .resume-header { font-size: 0.85rem; }
         }
     </style>
@@ -160,15 +175,15 @@
                     <p class="bullet-point">Guionista de [Conociendo al actor] para Naver V <span class="period-text-sm">(2015 - Ene 2017)</span></p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Columnista de TV y cine</strong> <span class="period-text">2008 - Presente</span></div>
-                    <p>Contribuciones y conferencias en numerosos medios</p>
+                    <p>Contribuciones 및 conferencias en numerosos medios</p>
                     <p class="bullet-point">Diarios: Korea Daily, Hankyoreh, etc.</p>
                     <p class="bullet-point">Revistas: GQ, Harper's Bazaar, W, Cine21, PD Journal, etc.</p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Entre otros</strong></div>
                     <p>Planificación y ejecución de contenido, entre otras experiencias</p>
                     <p class="bullet-point">Planificación, producción y presentación del podcast [Sisterhood] <span class="period-text-sm">Octubre 2018 ~ Enero 2023</span></p>
-                    <p class="bullet-point">Editora de la revista diaria del Festival Internacional de Cine de Mujeres de Seúl SIWFF <span class="period-text-sm">Junio 2016</span></p>
-                    <p class="bullet-point">Reportera encargada del diario en coreano de KOBIZ del Consejo de Cine de Corea <span class="period-text-sm">Agosto 2014 ~ Mayo 2015</span></p>
+                    <p class="bullet-point">Editora de la revista diaria del SIWFF <span class="period-text-sm">Junio 2016</span></p>
+                    <p class="bullet-point">Reportera encargada del diario en coreano de KOBIZ <span class="period-text-sm">Agosto 2014 ~ Mayo 2015</span></p>
                 </article>
 
                 <article id="edu">
@@ -238,8 +253,8 @@
             work1: { 
                 title: "<em><strong>El chamán ha desaparecido, la realidad ha entrado</strong></em>", 
                 meta: "novela, Uuhee Books, 2025", 
-                points: ["Clasificada entre las 100 mejores obras de ficción coreana en las principales librerías en línea.", "N.º 1 en la lista general en tiempo real de Millie’s Library."],
-                desc: "Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado, mientras trata de proteger a su hija." 
+                points: ["Clasificada entre las 100 mejores obras de ficción coreana.", "N.º 1 en la lista general en tiempo real de Millie’s Library."],
+                desc: "Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado." 
             },
             work2: { 
                 title: "<em><strong>El ramen nos completa</strong></em>", 
@@ -257,7 +272,7 @@
                 title: "<em><strong>El diario de trabajos a tiempo parcial de la señorita Yoon</strong></em>", 
                 meta: "ensayos, Miraebook, 2016", 
                 points: ["Libro de no ficción juvenil del año (2016).", "Libro Sejong (Programa de Difusión Literaria, 2016)."],
-                desc: "Un relato sobre el trabajo precario 및 la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
+                desc: "Un relato sobre el trabajo precario y la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
             }
         };
 
