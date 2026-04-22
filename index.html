@@ -12,7 +12,7 @@
             --blue-line-color: rgba(100, 150, 200, 0.4); 
             --period-color: rgba(100, 150, 200, 0.8); 
             --line-height: 35px; 
-            --left-margin-ratio: 25%; /* 모바일 가독성을 위해 메뉴 비중 소폭 확대 */
+            --left-margin-ratio: 25%; 
         }
 
         body {
@@ -21,7 +21,6 @@
             display: flex; flex-direction: column; align-items: center; min-height: 100vh;
         }
 
-        /* --- 리갈 패드 배경 --- */
         .legal-pad {
             width: 95%; max-width: 900px; background-color: #fff;
             margin-top: 20px; position: relative;
@@ -37,22 +36,19 @@
             display: flex; flex-direction: column;
         }
 
-        /* --- 헤더 --- */
         header { position: relative; height: calc(var(--line-height) * 3); width: 100%; flex-shrink: 0; }
         .header-content {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; align-items: center;
-            padding-top: 25px; box-sizing: border-box;
+            display: flex; align-items: center; padding-top: 25px; box-sizing: border-box;
         }
         .main-title {
             margin: 0; margin-left: calc(var(--left-margin-ratio) + 1rem); 
-            font-size: 1.4rem; font-weight: 500;
+            font-size: 1.5rem; font-weight: 500;
         }
 
-        /* [핵심] 모바일에서도 flex-direction: row를 강제 유지 */
-        .content-wrapper { display: flex; flex-direction: row !important; flex-grow: 1; margin-top: var(--line-height); width: 100%; }
+        /* 모바일에서도 좌우 레이아웃 강제 고정 */
+        .content-wrapper { display: flex; flex-direction: row !important; flex-grow: 1; margin-top: var(--line-height); }
 
-        /* --- 네비게이션 (왼쪽 고정) --- */
         nav { width: var(--left-margin-ratio); flex-shrink: 0; }
         .nav-links { list-style: none; padding: 0; margin: 0; width: 100%; }
         .nav-item, .sub-item {
@@ -60,73 +56,62 @@
             display: flex; align-items: center; justify-content: center;
         }
         .nav-links a, .sub-item a { 
-            text-decoration: none; color: #777; font-size: 13px; transition: 0.3s; padding: 0 2px; cursor: pointer;
+            text-decoration: none; color: #777; font-size: 14px; transition: 0.3s; padding: 0 5px; cursor: pointer;
             display: flex; align-items: center; height: 100%; line-height: 1; white-space: nowrap;
         }
         .nav-links a:hover, .nav-links a.active { color: #000; font-weight: 500; }
         .nav-links a.active { border-bottom: 1px solid #000; height: calc(var(--line-height) - 1px); }
 
         .sub-menu { list-style: none; padding: 0; margin: 0; width: 100%; }
-        .sub-item a { font-size: 11px; color: #aaa; }
+        .sub-item a { font-size: 12px; color: #aaa; }
         .sub-item a:hover, .sub-item a.active { color: #888; border-bottom: 1px solid #888 !important; height: calc(var(--line-height) - 1px); }
 
-        /* --- 본문 (오른쪽 고정) --- */
-        .main-content { 
-            flex-grow: 1; 
-            padding: 0 15px 0 10px; 
-            min-height: calc(var(--line-height) * 12); 
-            position: relative; 
-            overflow: hidden; 
-        }
+        .main-content { flex-grow: 1; padding: 0 20px 0 15px; min-height: calc(var(--line-height) * 15); position: relative; }
         article { display: none; width: 100%; }
         article.active { display: block; }
-        
-        /* 중앙 정렬 페이지 */
-        article.centered-content { height: 100%; }
-        .center-box { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%; }
 
+        /* 공통 텍스트 정렬 (자동 줄바꿈 대응) */
         p, .resume-header {
-            margin: 0; padding: 0; height: var(--line-height); 
-            display: flex; align-items: center; font-size: 0.9rem; font-weight: 300;
-            white-space: nowrap;
+            margin: 0; padding: 0;
+            min-height: var(--line-height); 
+            display: flex; align-items: center; 
+            font-size: 1rem; font-weight: 300;
+            line-height: var(--line-height); /* 줄바꿈 시 선에 맞춤 */
+            word-break: keep-all;
         }
         
-        .period-text { color: var(--period-color); margin-left: 8px; font-size: 0.8rem; }
-        .period-text-sm { color: var(--period-color); margin-left: 5px; font-size: 0.75rem; }
-        .bullet-point { padding-left: 12px; position: relative; }
+        .period-text { color: var(--period-color); margin-left: 10px; font-size: 0.9rem; }
+        .period-text-sm { color: var(--period-color); margin-left: 6px; font-size: 0.85rem; }
+        .bullet-point { padding-left: 15px; position: relative; display: block; }
         .bullet-point::before { content: "•"; position: absolute; left: 0; color: #aaa; }
         .skip-line { height: var(--line-height); width: 100%; }
 
-        /* --- 푸터 --- */
-        footer { width: 100%; padding: 20px 0; display: flex; justify-content: center; align-items: center; }
-        .copyright { font-size: 0.75rem; color: #aaa; text-align: center; }
-
-        /* --- Obras 2x2 --- */
-        .works-grid { 
-            display: grid; grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; padding-top: 15px; width: 100%; 
-        }
+        /* --- Obras 그리드 --- */
+        .works-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding-top: 15px; }
         .work-item { cursor: pointer; transition: transform 0.2s; }
-        .work-item img { width: 100%; height: auto; border-radius: 2px; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+        .work-item img { width: 100%; height: auto; border-radius: 2px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+
+        /* --- 푸터 --- */
+        footer { width: 100%; max-width: 900px; padding: 15px 0 40px 0; display: flex; justify-content: center; }
+        .copyright { font-size: 0.8rem; color: #aaa; text-align: center; }
 
         /* --- 모달 --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 2000; backdrop-filter: blur(3px); }
-        .modal-window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 500px; background-color: #fff; padding: 20px; border-radius: 2px; }
-        .modal-work-title { font-size: 1rem; text-align: center; font-weight: 500; margin: 0; }
-        .modal-divider { width: 100%; height: 1px; background-color: #eee; margin: 5px 0; }
-        .modal-meta { text-align: right; color: var(--period-color); font-size: 0.8rem; }
-        .modal-description { font-size: 0.9rem; line-height: 1.5; padding-top: 10px; text-align: justify; }
-        .close-icon { float: right; cursor: pointer; font-size: 1.5rem; color: #aaa; }
+        .modal-window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 550px; background-color: #fff; padding: 20px 30px 40px 30px; border-radius: 2px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .modal-header { display: flex; justify-content: flex-end; margin-bottom: 5px; }
+        .close-icon { cursor: pointer; font-size: 1.8rem; color: #aaa; }
+        .modal-work-title { width: 100%; text-align: center; font-size: 1.1rem; font-weight: 500; margin: 0; }
+        .modal-divider { width: 100%; height: 1px; background-color: #eee; margin: 10px 0; }
+        .modal-meta { text-align: right; color: var(--period-color); font-size: 0.9rem; }
+        .modal-body p { height: auto; line-height: 1.6; padding-top: 10px; text-align: justify; display: block; }
 
-        /* [모바일 전용 미세 조정] */
-        @media (max-width: 600px) {
-            :root { --left-margin-ratio: 28%; } /* 폰에서는 메뉴 공간을 조금 더 확보 */
-            .main-title { font-size: 1.1rem; }
-            .nav-links a { font-size: 11px; }
-            .sub-item a { font-size: 9px; }
-            p, .resume-header { font-size: 0.75rem; }
-            .period-text { font-size: 0.7rem; }
-            .main-content { padding-right: 10px; }
+        @media (max-width: 768px) {
+            :root { --left-margin-ratio: 30%; }
+            .main-title { font-size: 1.2rem; margin-left: calc(var(--left-margin-ratio) + 0.5rem); }
+            .nav-links a { font-size: 12px; }
+            .sub-item a { font-size: 10px; }
+            p, .resume-header { font-size: 0.85rem; }
+            .main-content { padding-left: 10px; }
         }
     </style>
 </head>
@@ -154,50 +139,55 @@
             </nav>
 
             <main class="main-content">
-                <article id="about" class="active centered-content">
-                    <div style="height: calc(var(--line-height) * 4);"></div>
-                    <div class="center-box">
-                        <p style="justify-content: center;">Escribiendo las historias que comienzan después del final</p>
+                <article id="about" class="active">
+                    <div style="height: calc(var(--line-height) * 2);"></div>
+                    <div style="text-align: center; width: 100%;">
+                        <p style="justify-content: center;">Escribiendo</p>
+                        <p style="justify-content: center;">las historias que comienzan</p>
+                        <p style="justify-content: center;">después del final</p>
                     </div>
                 </article>
                 
                 <article id="exp">
                     <p>como escritor <span class="period-text-sm">(19 años)</span></p>
                     <div class="skip-line"></div>
-                    <div class="resume-header"><strong>Guionista de dramas</strong> <span class="period-text">2017-Pres.</span></div>
-                    <p>Serie JTBC ‘Alguien que puedes conocer’</p>
-                    <p class="bullet-point">Naver TV / JTBC Special <span class="period-text-sm">2017</span></p>
+                    <div class="resume-header"><strong>Guionista de dramas</strong> <span class="period-text">2017 - Presente</span></div>
+                    <p>Guion del Serie de televisión JTBC ‘Alguien que puedes conocer’</p>
+                    <p class="bullet-point">Transmitido en Naver TV Cast <span class="period-text-sm">2017</span></p>
+                    <p class="bullet-point">Especial durante Chuseok en JTBC <span class="period-text-sm">2017</span></p>
                     <div class="skip-line"></div>
-                    <div class="resume-header"><strong>Guionista de entrevistas</strong> <span class="period-text">2015-Pres.</span></div>
-                    <p>Revista [MubMub] de CJ <span class="period-text-sm">2017</span></p>
-                    <p class="bullet-point">[Conociendo al actor] Naver V <span class="period-text-sm">2015</span></p>
+                    <div class="resume-header"><strong>Guionista de entrevistas</strong> <span class="period-text">2015 - Presente</span></div>
+                    <p>Especializado en entrevistas de cine</p>
+                    <p class="bullet-point">Revista [MubMub] de CJ <span class="period-text-sm">2017-2018</span></p>
+                    <p class="bullet-point">[Conociendo al actor] para Naver V <span class="period-text-sm">2015-2017</span></p>
                     <div class="skip-line"></div>
-                    <div class="resume-header"><strong>Columnista</strong> <span class="period-text">2008-Pres.</span></div>
-                    <p>TV, cultura popular y cine</p>
-                    <p class="bullet-point">GQ, Harper's Bazaar, Cine21, etc.</p>
+                    <div class="resume-header"><strong>Columnista</strong> <span class="period-text">2008 - Presente</span></div>
+                    <p>TV, cultura popular y cine en diversos medios</p>
+                    <p class="bullet-point">Korea Daily, Hankyoreh, GQ, Harper's Bazaar, etc.</p>
                 </article>
 
                 <article id="edu">
-                    <div class="resume-header"><strong>Univ. Sungkyunkwan</strong> <span class="period-text">2002-2006</span></div>
-                    <p class="bullet-point">Lit. Coreana y Comunicación</p>
+                    <div class="resume-header"><strong>Univ. Sungkyunkwan</strong> <span class="period-text">2002 - 2006</span></div>
+                    <p class="bullet-point">Literatura y Lengua Coreana / Comunicación y Medios</p>
                     <div class="skip-line"></div>
-                    <div class="resume-header"><strong>Cyber Univ. Foreign Studies</strong> <span class="period-text">2025-Pres.</span></div>
-                    <p class="bullet-point">Licenciatura en Español</p>
+                    <div class="resume-header"><strong>Cyber Univ. of Foreign Studies</strong> <span class="period-text">2025 - Presente</span></div>
+                    <p class="bullet-point">Licenciatura en Español (Transferencia)</p>
                 </article>
 
                 <article id="lang">
                     <div class="resume-header"><strong>🇬🇧 Inglés</strong></div>
-                    <p class="bullet-point">Conversación cotidiana</p>
+                    <p class="bullet-point">Capaz de mantener conversaciones cotidianas</p>
                     <p class="bullet-point">Residencia en Australia (1.5 años)</p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>🇪🇸 Español</strong> <span class="period-text">Nivel A2</span></div>
                     <p class="bullet-point">Más de 1200 días en Duolingo</p>
+                    <p class="bullet-point">Capaz de conversaciones básicas y lectura de noticias</p>
                 </article>
 
                 <article id="awards">
                     <div class="resume-header"><strong><em>🏆 Alguien que puedes conocer</em></strong></div>
-                    <p class="bullet-point"><strong>Premio de Oro</strong> - Houston Film <span class="period-text-sm">2018</span></p>
-                    <p class="bullet-point"><strong>Gran Premio</strong> - Busan Web <span class="period-text-sm">2018</span></p>
+                    <p class="bullet-point"><strong>Premio de Oro</strong> - Houston Int. Film Festival <span class="period-text-sm">2018</span></p>
+                    <p class="bullet-point"><strong>Gran Premio</strong> - Busan Int. Web Content Festival <span class="period-text-sm">2018</span></p>
                 </article>
 
                 <article id="works">
@@ -209,9 +199,9 @@
                     </div>
                 </article>
 
-                <article id="contact" class="centered-content">
+                <article id="contact">
                     <div style="height: calc(var(--line-height) * 2);"></div>
-                    <div class="center-box">
+                    <div style="text-align: center; width: 100%;">
                         <p style="justify-content: center;">✉️ yooninas@gmail.com</p>
                         <p style="justify-content: center;">📱 +82 10-8861-2154</p>
                         <p style="justify-content: center;">🏠 Seúl, Corea</p>
@@ -227,17 +217,33 @@
 
     <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
         <div class="modal-window" onclick="event.stopPropagation()">
-            <span class="close-icon" onclick="closeModal()">&times;</span>
+            <div class="modal-header"><span class="close-icon" onclick="closeModal()">&times;</span></div>
             <div id="modalBody"></div>
         </div>
     </div>
 
     <script>
         const worksData = {
-            work1: { title: "El chamán ha desaparecido", meta: "novela, 2025", desc: "Tras perder sus poderes divinos, un chamán intenta recuperar su lugar expulsando residentes de un edificio embrujado." },
-            work2: { title: "El ramen nos completa", meta: "ensayos, 2021", desc: "Reflexión sobre el sustento cotidiano y la vida en soledad a través del acto de cocinar fideos instantáneos." },
-            work3: { title: "Alguien que puedes conocer", meta: "drama, JTBC, 2017", desc: "Un romance con tintes de misterio sobre desbloquear el teléfono de un antiguo amante." },
-            work4: { title: "Diario de la Srta. Yoon", meta: "ensayos, 2016", desc: "Un relato sobre el trabajo precario y la supervivencia como freelance en Corea." }
+            work1: { 
+                title: "<em><strong>El chamán ha desaparecido, la realidad ha entrado</strong></em>", 
+                meta: "novela, Uuhee Books, 2025", 
+                desc: "Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado, mientras trata de proteger a su hija." 
+            },
+            work2: { 
+                title: "<em><strong>El ramen nos completa</strong></em>", 
+                meta: "ensayos, Semicolon Books, 2021", 
+                desc: "Una reflexión sobre el sustento cotidiano y la vida en soledad a través del acto de cocinar fideos instantáneos." 
+            },
+            work3: { 
+                title: "<em><strong>Alguien que puedes conocer</strong></em>", 
+                meta: "drama, JTBC, 2017", 
+                desc: "Un romance con tintes de misterio en el que desbloquear el teléfono de un antiguo amante revela verdades ocultas sobre una relación pasada. 📺 <a href='https://tv.naver.com/jtbc.pymk' target='_blank' style='color:#333; text-decoration:none;'>알 수도 있는 사람</a>" 
+            },
+            work4: { 
+                title: "<em><strong>El diario de trabajos a tiempo parcial de la señorita Yoon</strong></em>", 
+                meta: "ensayos, Miraebook, 2016", 
+                desc: "Un relato sobre el trabajo precario 및 la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
+            }
         };
 
         function showContent(sectionId) {
@@ -252,7 +258,7 @@
         function openModal(id) {
             const data = worksData[id];
             document.getElementById('modalBody').innerHTML = `
-                <h3 class="modal-work-title"><em><strong>${data.title}</strong></em></h3>
+                <h3 class="modal-work-title">${data.title}</h3>
                 <div class="modal-divider"></div>
                 <div class="modal-meta">${data.meta}</div>
                 <p class="modal-description">${data.desc}</p>
