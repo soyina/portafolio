@@ -19,6 +19,7 @@
             margin: 0; padding: 0; background-color: #ffffff;
             font-family: 'Noto Serif KR', serif; color: #333;
             display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+            line-height: 1.4; /* 전체 줄간격 140% 적용 */
         }
 
         /* --- 리갈 패드 배경 --- */
@@ -47,7 +48,6 @@
             font-size: 1.5rem; font-weight: 500;
         }
 
-        /* [중요] 모바일 좌우 2단 레이아웃 강제 고정 */
         .content-wrapper { display: flex; flex-direction: row !important; flex-grow: 1; margin-top: var(--line-height); width: 100%; }
 
         nav { width: var(--left-margin-ratio); flex-shrink: 0; }
@@ -67,7 +67,6 @@
         .sub-item a { font-size: 12px; color: #aaa; }
         .sub-item a:hover, .sub-item a.active { color: #888; border-bottom: 1px solid #888 !important; height: calc(var(--line-height) - 1px); }
 
-        /* --- 본문 (모바일에서 글자 크기 최적화) --- */
         .main-content { flex-grow: 1; padding: 0 20px 0 15px; min-height: calc(var(--line-height) * 18); position: relative; }
         article { display: none; width: 100%; }
         article.active { display: block; }
@@ -87,7 +86,6 @@
         .bullet-point::before { content: "•"; position: absolute; left: 0; color: #aaa; }
         .skip-line { height: var(--line-height); width: 100%; }
 
-        /* --- Obras 2x2 그리드 --- */
         .works-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding-top: 15px; }
         .work-item { cursor: pointer; transition: transform 0.2s; }
         .work-item img { width: 100%; height: auto; border-radius: 2px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
@@ -100,17 +98,24 @@
         .modal-window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 550px; background-color: #fff; padding: 20px 30px 40px 30px; border-radius: 2px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         .modal-header { display: flex; justify-content: flex-end; margin-bottom: 5px; }
         .close-icon { cursor: pointer; font-size: 1.8rem; color: #aaa; }
-        .modal-work-title { width: 100%; text-align: center; font-size: 1.1rem; font-weight: 500; margin: 0; }
+        .modal-work-title { width: 100%; text-align: center; font-size: 1.1rem; font-weight: 500; margin: 0; line-height: 1.4; }
         .modal-divider { width: 100%; height: 1px; background-color: #eee; margin: 10px 0; }
-        .modal-meta { text-align: right; color: var(--period-color); font-size: 0.9rem; }
-        .modal-body p { height: auto; line-height: 1.6; padding-top: 10px; text-align: justify; display: block; }
+        
+        .modal-meta-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; }
+        .modal-meta { color: var(--period-color); font-size: 0.9rem; text-align: right; flex-grow: 1; }
+        .modal-link-box { text-align: right; }
+        .modal-link-box a { color: #333; text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+
+        .modal-body p { height: auto; line-height: 1.4; padding-top: 15px; text-align: justify; display: block; margin: 0; }
+        .bullet-info { position: relative; padding-left: 15px; margin-bottom: 3px; display: block; font-size: 0.9rem; color: #555; }
+        .bullet-info::before { content: "•"; position: absolute; left: 0; color: #aaa; }
 
         @media (max-width: 768px) {
             :root { --left-margin-ratio: 30%; }
             .main-title { font-size: 1.2rem; }
-            .nav-links a { font-size: 12px; }
-            .sub-item a { font-size: 10px; }
-            p, .resume-header { font-size: 0.85rem; }
+            .nav-links a { font-size: 11px; }
+            .sub-item a { font-size: 9px; }
+            p, .resume-header { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -161,12 +166,11 @@
                     <p class="bullet-point">Guionista de entrevistas [Conociendo al actor] para Naver V <span class="period-text-sm">(2015~Ene 2017)</span></p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Columnista de TV, cultura popular y cine</strong> <span class="period-text">2008 - Presente</span></div>
-                    <p>Contribuciones y conferencias relacionadas en numerosos medios</p>
+                    <p>Contribuciones 및 conferencias relacionadas en numerosos medios</p>
                     <p class="bullet-point">Principales diarios: Korea Daily, Hankyoreh, etc.</p>
                     <p class="bullet-point">Revistas: GQ, Harper's Bazaar, W, Cine21, PD Journal, etc.</p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Entre otros</strong></div>
-                    <p>Planificación y ejecución de contenido</p>
                     <p class="bullet-point">Podcast [Sisterhood] <span class="period-text-sm">(Oct 2018~Ene 2023)</span></p>
                     <p class="bullet-point">Editora revista diaria SIWFF <span class="period-text-sm">(Jun 2016)</span></p>
                     <p class="bullet-point">Reportera del diario en coreano de KOBIZ <span class="period-text-sm">(Ago 2014~May 2015)</span></p>
@@ -184,23 +188,18 @@
                 <article id="lang">
                     <div class="resume-header"><strong>🇬🇧 Inglés</strong></div>
                     <p class="bullet-point">Capaz de mantener conversaciones cotidianas</p>
-                    <p class="bullet-point">Residencia de 1 año en Brisbane, 6 meses en Melbourne <span class="period-text-sm">(visa WH)</span></p>
+                    <p class="bullet-point">Residencia de 1.5 años en Australia <span class="period-text-sm">(visa WH)</span></p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>🇪🇸 Español</strong> <span class="period-text">Nivel A2</span></div>
-                    <p class="bullet-point">según Duolingo, más de 1200 días</p>
+                    <p class="bullet-point">más de 1200 días en Duolingo</p>
                     <p class="bullet-point">capaz de mantener conversaciones básicas</p>
-                    <p class="bullet-point">capaz de leer noticias relacionadas con el fútbol</p>
                 </article>
 
                 <article id="awards">
                     <div class="resume-header"><strong><em>🏆 Alguien que puedes conocer</em></strong></div>
                     <div class="skip-line"></div>
-                    <p class="bullet-point"><strong>Premio de Oro</strong></p>
-                    <p style="padding-left: 15px;">en la categoría de Drama Especial de TV</p>
-                    <p style="padding-left: 15px;">en el ‘Festival Internacional de Cine de Houston’ <span class="period-text-sm">2018</span></p>
-                    <div class="skip-line"></div>
-                    <p class="bullet-point"><strong>Gran Premio</strong></p>
-                    <p style="padding-left: 15px;">en los ‘Premios del Festival Internacional de Contenidos Web de Busan’ <span class="period-text-sm">2018</span></p>
+                    <p class="bullet-point"><strong>Premio de Oro</strong> - Houston Int. Film Festival <span class="period-text-sm">2018</span></p>
+                    <p class="bullet-point"><strong>Gran Premio</strong> - Busan Int. Web Content Festival <span class="period-text-sm">2018</span></p>
                 </article>
 
                 <article id="works">
@@ -240,22 +239,26 @@
             work1: { 
                 title: "<em><strong>El chamán ha desaparecido, la realidad ha entrado</strong></em>", 
                 meta: "novela, Uuhee Books, 2025", 
-                desc: "Clasificada entre las 100 mejores obras de ficción coreana en las principales librerías en línea. N.º 1 en la lista general en tiempo real de Millie’s Library. <br><br> Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado, mientras trata de proteger a su hija." 
+                points: ["Clasificada entre las 100 mejores obras de ficción coreana en las principales librerías en línea.", "N.º 1 en la lista general en tiempo real de Millie’s Library."],
+                desc: "Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado, mientras trata de proteger a su hija." 
             },
             work2: { 
                 title: "<em><strong>El ramen nos completa</strong></em>", 
                 meta: "ensayos, Semicolon Books, 2021", 
-                desc: "Publicado en Taiwán con el título Mi momento ramen (2023). Derechos para el Reino Unido vendidos a Transworld (Penguin Random House), publicación prevista para 2026. <br><br> Una reflexión sobre el sustento cotidiano y la vida en soledad a través del acto de cocinar fideos instantáneos." 
+                points: ["Publicado en Taiwán con el título Mi momento ramen (2023).", "Derechos para el Reino Unido vendidos a Transworld (Penguin Random House)."],
+                desc: "Una reflexión sobre el sustento cotidiano 및 la vida en soledad a través del acto de cocinar fideos instantáneos." 
             },
             work3: { 
                 title: "<em><strong>Alguien que puedes conocer</strong></em>", 
                 meta: "drama en dos partes, JTBC, 2017", 
-                desc: "Un romance con tintes de misterio en el que desbloquear el teléfono de un antiguo amante revela verdades ocultas sobre una relación pasada. <br><br> 📺 <a href='https://tv.naver.com/jtbc.pymk' target='_blank' style='color:#333; text-decoration:none; font-weight:500;'>알 수도 있는 사람 (Naver TV)</a>" 
+                isSpecial: true,
+                desc: "Un romance con tintes de misterio en el que desbloquear el teléfono de un antiguo amante revela verdades ocultas sobre una relación pasada." 
             },
             work4: { 
                 title: "<em><strong>El diario de trabajos a tiempo parcial de la señorita Yoon</strong></em>", 
                 meta: "ensayos, Miraebook, 2016", 
-                desc: "Libro de no ficción juvenil del año (2016). Libro Sejong (Programa de Difusión Literaria, 2016). <br><br> Un relato sobre el trabajo precario y la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
+                points: ["Libro de no ficción juvenil del año (2016).", "Libro Sejong (Programa de Difusión Literaria, 2016)."],
+                desc: "Un relato sobre el trabajo precario y la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
             }
         };
 
@@ -270,12 +273,28 @@
 
         function openModal(id) {
             const data = worksData[id];
-            document.getElementById('modalBody').innerHTML = `
-                <h3 class="modal-work-title">${data.title}</h3>
-                <div class="modal-divider"></div>
-                <div class="modal-meta">${data.meta}</div>
-                <p class="modal-description">${data.desc}</p>
-            `;
+            let contentHtml = `<h3 class="modal-work-title">${data.title}</h3><div class="modal-divider"></div>`;
+            
+            if (data.isSpecial) {
+                // Obras 3: 티비 이모지와 링크 우측 고정
+                contentHtml += `
+                    <div class="modal-meta-row">
+                        <div class="modal-meta">${data.meta}</div>
+                        <div class="modal-link-box">
+                            <a href="https://tv.naver.com/jtbc.pymk" target="_blank">📺 알 수도 있는 사람</a>
+                        </div>
+                    </div>`;
+            } else {
+                // Obras 1, 2, 4: 불렛 포인트 2줄
+                contentHtml += `<div class="modal-meta">${data.meta}</div>`;
+                data.points.forEach(pt => {
+                    contentHtml += `<span class="bullet-info">${pt}</span>`;
+                });
+            }
+
+            contentHtml += `<p class="modal-description">${data.desc}</p>`;
+            
+            document.getElementById('modalBody').innerHTML = contentHtml;
             document.getElementById('modalOverlay').style.display = "block";
             document.body.style.overflow = "hidden";
         }
