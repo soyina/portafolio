@@ -46,7 +46,6 @@
             font-size: 1.5rem; font-weight: 500;
         }
 
-        /* 모바일에서도 좌우 레이아웃 강제 고정 */
         .content-wrapper { display: flex; flex-direction: row !important; flex-grow: 1; margin-top: var(--line-height); }
 
         nav { width: var(--left-margin-ratio); flex-shrink: 0; }
@@ -66,18 +65,17 @@
         .sub-item a { font-size: 12px; color: #aaa; }
         .sub-item a:hover, .sub-item a.active { color: #888; border-bottom: 1px solid #888 !important; height: calc(var(--line-height) - 1px); }
 
-        .main-content { flex-grow: 1; padding: 0 20px 0 15px; min-height: calc(var(--line-height) * 15); position: relative; }
+        .main-content { flex-grow: 1; padding: 0 20px 0 15px; min-height: calc(var(--line-height) * 18); position: relative; }
         article { display: none; width: 100%; }
         article.active { display: block; }
 
-        /* 공통 텍스트 정렬 (자동 줄바꿈 대응) */
         p, .resume-header {
             margin: 0; padding: 0;
             min-height: var(--line-height); 
             display: flex; align-items: center; 
             font-size: 1rem; font-weight: 300;
-            line-height: var(--line-height); /* 줄바꿈 시 선에 맞춤 */
-            word-break: keep-all;
+            line-height: var(--line-height);
+            word-break: break-word; /* 모바일 대응: 단어 단위 줄바꿈 */
         }
         
         .period-text { color: var(--period-color); margin-left: 10px; font-size: 0.9rem; }
@@ -86,16 +84,13 @@
         .bullet-point::before { content: "•"; position: absolute; left: 0; color: #aaa; }
         .skip-line { height: var(--line-height); width: 100%; }
 
-        /* --- Obras 그리드 --- */
         .works-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding-top: 15px; }
         .work-item { cursor: pointer; transition: transform 0.2s; }
         .work-item img { width: 100%; height: auto; border-radius: 2px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
 
-        /* --- 푸터 --- */
         footer { width: 100%; max-width: 900px; padding: 15px 0 40px 0; display: flex; justify-content: center; }
         .copyright { font-size: 0.8rem; color: #aaa; text-align: center; }
 
-        /* --- 모달 --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 2000; backdrop-filter: blur(3px); }
         .modal-window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 550px; background-color: #fff; padding: 20px 30px 40px 30px; border-radius: 2px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         .modal-header { display: flex; justify-content: flex-end; margin-bottom: 5px; }
@@ -107,11 +102,10 @@
 
         @media (max-width: 768px) {
             :root { --left-margin-ratio: 30%; }
-            .main-title { font-size: 1.2rem; margin-left: calc(var(--left-margin-ratio) + 0.5rem); }
-            .nav-links a { font-size: 12px; }
-            .sub-item a { font-size: 10px; }
-            p, .resume-header { font-size: 0.85rem; }
-            .main-content { padding-left: 10px; }
+            .main-title { font-size: 1.2rem; }
+            .nav-links a { font-size: 11px; }
+            .sub-item a { font-size: 9px; }
+            p, .resume-header { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -153,41 +147,55 @@
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Guionista de dramas</strong> <span class="period-text">2017 - Presente</span></div>
                     <p>Guion del Serie de televisión JTBC ‘Alguien que puedes conocer’</p>
-                    <p class="bullet-point">Transmitido en Naver TV Cast <span class="period-text-sm">2017</span></p>
-                    <p class="bullet-point">Especial durante Chuseok en JTBC <span class="period-text-sm">2017</span></p>
+                    <p class="bullet-point">Transmitido en Naver TV Cast <span class="period-text-sm">del 31 de julio al 11 de agosto de 2017</span></p>
+                    <p class="bullet-point">y especial durante Chuseok <span class="period-text-sm">el 2 de septiembre en JTBC</span></p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Guionista de entrevistas</strong> <span class="period-text">2015 - Presente</span></div>
-                    <p>Especializado en entrevistas de cine</p>
-                    <p class="bullet-point">Revista [MubMub] de CJ <span class="period-text-sm">2017-2018</span></p>
-                    <p class="bullet-point">[Conociendo al actor] para Naver V <span class="period-text-sm">2015-2017</span></p>
+                    <p>especializado en entrevistas de cine</p>
+                    <p class="bullet-point">Guionista de actor para la revista [MubMub] de CJ <span class="period-text-sm">(Ago 2017~Ene 2018)</span></p>
+                    <p class="bullet-point">Guionista de entrevistas [Conociendo al actor] para Naver V <span class="period-text-sm">(2015~Ene 2017)</span></p>
                     <div class="skip-line"></div>
-                    <div class="resume-header"><strong>Columnista</strong> <span class="period-text">2008 - Presente</span></div>
-                    <p>TV, cultura popular y cine en diversos medios</p>
-                    <p class="bullet-point">Korea Daily, Hankyoreh, GQ, Harper's Bazaar, etc.</p>
+                    <div class="resume-header"><strong>Columnista de TV, cultura popular y cine</strong> <span class="period-text">2008 - Presente</span></div>
+                    <p>Contribuciones y conferencias relacionadas en numerosos medios</p>
+                    <p class="bullet-point">Principales diarios: Korea Daily, Hankyoreh, etc.</p>
+                    <p class="bullet-point">Revistas: GQ, Harper's Bazaar, W, Cine21, PD Journal, etc.</p>
+                    <div class="skip-line"></div>
+                    <div class="resume-header"><strong>Entre otros</strong></div>
+                    <p>Planificación y ejecución de contenido</p>
+                    <p class="bullet-point">Podcast [Sisterhood] <span class="period-text-sm">(Oct 2018~Ene 2023)</span></p>
+                    <p class="bullet-point">Editora revista diaria SIWFF <span class="period-text-sm">(Jun 2016)</span></p>
+                    <p class="bullet-point">Reportera del diario en coreano de KOBIZ <span class="period-text-sm">(Ago 2014~May 2015)</span></p>
                 </article>
 
                 <article id="edu">
-                    <div class="resume-header"><strong>Univ. Sungkyunkwan</strong> <span class="period-text">2002 - 2006</span></div>
-                    <p class="bullet-point">Literatura y Lengua Coreana / Comunicación y Medios</p>
+                    <div class="resume-header"><strong>Seúl, Universidad Sungkyunkwan</strong> <span class="period-text">2002.3 – 2006.8</span></div>
+                    <p class="bullet-point">Licenciatura en Literatura y Lengua Coreana / Comunicación y Medios</p>
                     <div class="skip-line"></div>
-                    <div class="resume-header"><strong>Cyber Univ. of Foreign Studies</strong> <span class="period-text">2025 - Presente</span></div>
-                    <p class="bullet-point">Licenciatura en Español (Transferencia)</p>
+                    <div class="resume-header"><strong>Cyber Hankuk University of Foreign Studies</strong> <span class="period-text">2025 – Presente</span></div>
+                    <p class="bullet-point">Licenciatura en Español <span class="period-text-sm">(transferencia, tercer año)</span></p>
+                    <p class="bullet-point"><span class="period-text-sm">* actualmente en pausa académica</span></p>
                 </article>
 
                 <article id="lang">
                     <div class="resume-header"><strong>🇬🇧 Inglés</strong></div>
                     <p class="bullet-point">Capaz de mantener conversaciones cotidianas</p>
-                    <p class="bullet-point">Residencia en Australia (1.5 años)</p>
+                    <p class="bullet-point">Residencia de 1 año en Brisbane, 6 meses en Melbourne <span class="period-text-sm">(visa WH)</span></p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>🇪🇸 Español</strong> <span class="period-text">Nivel A2</span></div>
-                    <p class="bullet-point">Más de 1200 días en Duolingo</p>
-                    <p class="bullet-point">Capaz de conversaciones básicas y lectura de noticias</p>
+                    <p class="bullet-point">según Duolingo, más de 1200 días</p>
+                    <p class="bullet-point">capaz de mantener conversaciones básicas</p>
+                    <p class="bullet-point">capaz de leer noticias relacionadas con el fútbol</p>
                 </article>
 
                 <article id="awards">
                     <div class="resume-header"><strong><em>🏆 Alguien que puedes conocer</em></strong></div>
-                    <p class="bullet-point"><strong>Premio de Oro</strong> - Houston Int. Film Festival <span class="period-text-sm">2018</span></p>
-                    <p class="bullet-point"><strong>Gran Premio</strong> - Busan Int. Web Content Festival <span class="period-text-sm">2018</span></p>
+                    <div class="skip-line"></div>
+                    <p class="bullet-point"><strong>Premio de Oro</strong></p>
+                    <p style="padding-left: 15px;">en la categoría de Drama Especial de TV</p>
+                    <p style="padding-left: 15px;">en el ‘Festival Internacional de Cine de Houston’ <span class="period-text-sm">2018</span></p>
+                    <div class="skip-line"></div>
+                    <p class="bullet-point"><strong>Gran Premio</strong></p>
+                    <p style="padding-left: 15px;">en los ‘Premios del Festival Internacional de Contenidos Web de Busan’ <span class="period-text-sm">2018</span></p>
                 </article>
 
                 <article id="works">
@@ -227,22 +235,22 @@
             work1: { 
                 title: "<em><strong>El chamán ha desaparecido, la realidad ha entrado</strong></em>", 
                 meta: "novela, Uuhee Books, 2025", 
-                desc: "Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado, mientras trata de proteger a su hija." 
+                desc: "Clasificada entre las 100 mejores obras de ficción coreana en las principales librerías en línea. N.º 1 en la lista general en tiempo real de Millie’s Library. <br><br> Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado, mientras trata de proteger a su hija." 
             },
             work2: { 
                 title: "<em><strong>El ramen nos completa</strong></em>", 
                 meta: "ensayos, Semicolon Books, 2021", 
-                desc: "Una reflexión sobre el sustento cotidiano y la vida en soledad a través del acto de cocinar fideos instantáneos." 
+                desc: "Publicado en Taiwán con el título Mi momento ramen (2023). Derechos para el Reino Unido vendidos a Transworld (Penguin Random House), publicación prevista para 2026. <br><br> Una reflexión sobre el sustento cotidiano y la vida en soledad a través del acto de cocinar fideos instantáneos." 
             },
             work3: { 
                 title: "<em><strong>Alguien que puedes conocer</strong></em>", 
-                meta: "drama, JTBC, 2017", 
-                desc: "Un romance con tintes de misterio en el que desbloquear el teléfono de un antiguo amante revela verdades ocultas sobre una relación pasada. 📺 <a href='https://tv.naver.com/jtbc.pymk' target='_blank' style='color:#333; text-decoration:none;'>알 수도 있는 사람</a>" 
+                meta: "drama en dos partes, JTBC, 2017", 
+                desc: "Un romance con tintes de misterio en el que desbloquear el teléfono de un antiguo amante revela verdades ocultas sobre una relación pasada. <br><br> 📺 <a href='https://tv.naver.com/jtbc.pymk' target='_blank' style='color:#333; text-decoration:none; font-weight:500;'>알 수도 있는 사람 (Naver TV)</a>" 
             },
             work4: { 
                 title: "<em><strong>El diario de trabajos a tiempo parcial de la señorita Yoon</strong></em>", 
                 meta: "ensayos, Miraebook, 2016", 
-                desc: "Un relato sobre el trabajo precario 및 la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
+                desc: "Libro de no ficción juvenil del año (2016). Libro Sejong (Programa de Difusión Literaria, 2016). <br><br> Un relato sobre el trabajo precario 및 la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
             }
         };
 
