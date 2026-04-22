@@ -19,7 +19,6 @@
             margin: 0; padding: 0; background-color: #ffffff;
             font-family: 'Noto Serif KR', serif; color: #333;
             display: flex; flex-direction: column; align-items: center; min-height: 100vh;
-            line-height: 1.4; /* 전체 줄간격 140% 적용 */
         }
 
         /* --- 리갈 패드 배경 --- */
@@ -93,29 +92,31 @@
         footer { width: 100%; max-width: 900px; padding: 15px 0 40px 0; display: flex; justify-content: center; }
         .copyright { font-size: 0.8rem; color: #aaa; text-align: center; }
 
-        /* --- 모달 --- */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 2000; backdrop-filter: blur(3px); }
-        .modal-window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 550px; background-color: #fff; padding: 20px 30px 40px 30px; border-radius: 2px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        /* --- 팝업창(모달) 미적 미세 조정 --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.75); z-index: 2000; backdrop-filter: blur(3px); }
+        .modal-window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 550px; background-color: #fff; padding: 30px 40px 45px 40px; border-radius: 2px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         .modal-header { display: flex; justify-content: flex-end; margin-bottom: 5px; }
-        .close-icon { cursor: pointer; font-size: 1.8rem; color: #aaa; }
-        .modal-work-title { width: 100%; text-align: center; font-size: 1.1rem; font-weight: 500; margin: 0; line-height: 1.4; }
-        .modal-divider { width: 100%; height: 1px; background-color: #eee; margin: 10px 0; }
-        
-        .modal-meta-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; }
-        .modal-meta { color: var(--period-color); font-size: 0.9rem; text-align: right; flex-grow: 1; }
-        .modal-link-box { text-align: right; }
-        .modal-link-box a { color: #333; text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+        .close-icon { cursor: pointer; font-size: 1.8rem; color: #aaa; transition: 0.2s; }
+        .close-icon:hover { color: #333; }
 
-        .modal-body p { height: auto; line-height: 1.4; padding-top: 15px; text-align: justify; display: block; margin: 0; }
-        .bullet-info { position: relative; padding-left: 15px; margin-bottom: 3px; display: block; font-size: 0.9rem; color: #555; }
-        .bullet-info::before { content: "•"; position: absolute; left: 0; color: #aaa; }
+        .modal-work-title { width: 100%; text-align: center; font-size: 1.2rem; font-weight: 500; margin: 10px 0 0 0; line-height: 1.4; }
+        .modal-divider { width: 100%; height: 1px; background-color: #eee; margin: 8px 0; }
+        .modal-meta { text-align: right; color: var(--period-color); font-size: 0.9rem; margin-bottom: 25px; font-weight: 300; }
+        
+        .modal-link-row { display: flex; justify-content: flex-end; margin-bottom: 25px; }
+        .modal-link-box a { color: #333; text-decoration: none; font-weight: 500; font-size: 0.95rem; border-bottom: 1px solid #ddd; padding-bottom: 2px; }
+
+        .modal-body p { height: auto; line-height: 1.4; text-align: justify; display: block; margin: 0; }
+        .bullet-info { position: relative; padding-left: 20px; margin-bottom: 8px; display: block; font-size: 0.95rem; color: #444; line-height: 1.4; font-weight: 300; }
+        .bullet-info::before { content: "•"; position: absolute; left: 0; color: var(--period-color); font-weight: bold; }
+        .modal-description { margin-top: 25px !important; color: #333; font-weight: 300; }
 
         @media (max-width: 768px) {
             :root { --left-margin-ratio: 30%; }
+            .modal-window { width: 90%; padding: 25px 20px; }
             .main-title { font-size: 1.2rem; }
-            .nav-links a { font-size: 11px; }
-            .sub-item a { font-size: 9px; }
-            p, .resume-header { font-size: 0.8rem; }
+            p, .resume-header { font-size: 0.85rem; }
+            .modal-work-title { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -157,23 +158,24 @@
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Guionista de dramas</strong> <span class="period-text">2017 - Presente</span></div>
                     <p>Guion del Serie de televisión JTBC ‘Alguien que puedes conocer’</p>
-                    <p class="bullet-point">Transmitido en Naver TV Cast <span class="period-text-sm">del 31 de julio al 11 de agosto de 2017</span></p>
-                    <p class="bullet-point">y especial durante Chuseok <span class="period-text-sm">el 2 de septiembre en JTBC</span></p>
+                    <p class="bullet-point">Transmitido en Naver TV Cast del 31 de julio al 11 de agosto de 2017</p>
+                    <p class="bullet-point">y 특별판 en JTBC el 2 de septiembre de 2017</p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Guionista de entrevistas</strong> <span class="period-text">2015 - Presente</span></div>
                     <p>especializado en entrevistas de cine</p>
-                    <p class="bullet-point">Guionista de actor para la revista [MubMub] de CJ <span class="period-text-sm">(Ago 2017~Ene 2018)</span></p>
-                    <p class="bullet-point">Guionista de entrevistas [Conociendo al actor] para Naver V <span class="period-text-sm">(2015~Ene 2017)</span></p>
+                    <p class="bullet-point">Guionista de actor para la revista [MubMub] de CJ (Ago 2017~Ene 2018)</p>
+                    <p class="bullet-point">Guionista de entrevistas [Conociendo al actor] para Naver V (2015~Ene 2017)</p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Columnista de TV, cultura popular y cine</strong> <span class="period-text">2008 - Presente</span></div>
-                    <p>Contribuciones 및 conferencias relacionadas en numerosos medios</p>
+                    <p>Contribuciones y conferencias relacionadas en numerosos medios</p>
                     <p class="bullet-point">Principales diarios: Korea Daily, Hankyoreh, etc.</p>
                     <p class="bullet-point">Revistas: GQ, Harper's Bazaar, W, Cine21, PD Journal, etc.</p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Entre otros</strong></div>
-                    <p class="bullet-point">Podcast [Sisterhood] <span class="period-text-sm">(Oct 2018~Ene 2023)</span></p>
-                    <p class="bullet-point">Editora revista diaria SIWFF <span class="period-text-sm">(Jun 2016)</span></p>
-                    <p class="bullet-point">Reportera del diario en coreano de KOBIZ <span class="period-text-sm">(Ago 2014~May 2015)</span></p>
+                    <p>Planificación y ejecución de contenido</p>
+                    <p class="bullet-point">Podcast [Sisterhood] (Oct 2018~Ene 2023)</p>
+                    <p class="bullet-point">Editora revista diaria SIWFF (Jun 2016)</p>
+                    <p class="bullet-point">Reportera del diario en coreano de KOBIZ (Ago 2014~May 2015)</p>
                 </article>
 
                 <article id="edu">
@@ -181,14 +183,14 @@
                     <p class="bullet-point">Licenciatura en Literatura y Lengua Coreana / Comunicación y Medios</p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Cyber Hankuk University of Foreign Studies</strong> <span class="period-text">2025 – Presente</span></div>
-                    <p class="bullet-point">Licenciatura en Español <span class="period-text-sm">(transferencia, tercer año)</span></p>
+                    <p class="bullet-point">Licenciatura en Español (transferencia, tercer año)</p>
                     <p class="bullet-point"><span class="period-text-sm">* actualmente en pausa académica</span></p>
                 </article>
 
                 <article id="lang">
                     <div class="resume-header"><strong>🇬🇧 Inglés</strong></div>
                     <p class="bullet-point">Capaz de mantener conversaciones cotidianas</p>
-                    <p class="bullet-point">Residencia de 1.5 años en Australia <span class="period-text-sm">(visa WH)</span></p>
+                    <p class="bullet-point">Residencia de 1.5 años en Australia (visa WH)</p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>🇪🇸 Español</strong> <span class="period-text">Nivel A2</span></div>
                     <p class="bullet-point">más de 1200 días en Duolingo</p>
@@ -245,7 +247,7 @@
             work2: { 
                 title: "<em><strong>El ramen nos completa</strong></em>", 
                 meta: "ensayos, Semicolon Books, 2021", 
-                points: ["Publicado en Taiwán con el título Mi momento ramen (2023).", "Derechos para el Reino Unido vendidos a Transworld (Penguin Random House)."],
+                points: ["Publicado en Taiwán con el título Mi momento ramen (2023).", "Derechos para el Reino Unido vendidos a Transworld (Penguin Random House), publicación prevista para 2026."],
                 desc: "Una reflexión sobre el sustento cotidiano 및 la vida en soledad a través del acto de cocinar fideos instantáneos." 
             },
             work3: { 
@@ -258,7 +260,7 @@
                 title: "<em><strong>El diario de trabajos a tiempo parcial de la señorita Yoon</strong></em>", 
                 meta: "ensayos, Miraebook, 2016", 
                 points: ["Libro de no ficción juvenil del año (2016).", "Libro Sejong (Programa de Difusión Literaria, 2016)."],
-                desc: "Un relato sobre el trabajo precario y la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
+                desc: "Un relato sobre el trabajo precario 및 la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
             }
         };
 
@@ -276,23 +278,19 @@
             let contentHtml = `<h3 class="modal-work-title">${data.title}</h3><div class="modal-divider"></div>`;
             
             if (data.isSpecial) {
-                // Obras 3: 티비 이모지와 링크 우측 고정
-                contentHtml += `
-                    <div class="modal-meta-row">
-                        <div class="modal-meta">${data.meta}</div>
-                        <div class="modal-link-box">
-                            <a href="https://tv.naver.com/jtbc.pymk" target="_blank">📺 알 수도 있는 사람</a>
-                        </div>
-                    </div>`;
+                // Obras 3: 티비 이모지와 링크 우측 고정 (간격 확보)
+                contentHtml += `<div class="modal-meta">${data.meta}</div>`;
+                contentHtml += `<div class="modal-link-row"><div class="modal-link-box"><a href="https://tv.naver.com/jtbc.pymk" target="_blank">📺 알 수도 있는 사람</a></div></div>`;
             } else {
-                // Obras 1, 2, 4: 불렛 포인트 2줄
+                // Obras 1, 2, 4: 메타 정보 + 불렛 포인트
                 contentHtml += `<div class="modal-meta">${data.meta}</div>`;
                 data.points.forEach(pt => {
                     contentHtml += `<span class="bullet-info">${pt}</span>`;
                 });
             }
 
-            contentHtml += `<p class="modal-description">${data.desc}</p>`;
+            // 시놉시스 섹션
+            contentHtml += `<p class="modal-body modal-description">${data.desc}</p>`;
             
             document.getElementById('modalBody').innerHTML = contentHtml;
             document.getElementById('modalOverlay').style.display = "block";
