@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ina Yoon | Portafolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --red-line-color: rgba(255, 100, 100, 0.5); 
+            --blue-line-color: rgba(100, 150, 200, 0.4); 
+            --period-color: rgba(100, 150, 200, 0.8); 
+            --line-height: 35px; 
+            --left-margin-ratio: 20%; 
+        }
+
+        body {
+            margin: 0; padding: 0; background-color: #ffffff;
+            font-family: 'Noto Serif KR', serif; color: #333;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+
+        /* --- 리갈 패드 배경 --- */
+        .legal-pad {
+            width: 90%; max-width: 900px; background-color: #fff;
+            margin-top: 40px; position: relative;
+            background-image: 
+                linear-gradient(to right, transparent calc(var(--left-margin-ratio) - 1px), var(--red-line-color) calc(var(--left-margin-ratio) - 1px), var(--red-line-color) calc(var(--left-margin-ratio) + 1px), transparent calc(var(--left-margin-ratio) + 1px), transparent calc(var(--left-margin-ratio) + 4px), var(--red-line-color) calc(var(--left-margin-ratio) + 4px), var(--red-line-color) calc(var(--left-margin-ratio) + 6px), transparent calc(var(--left-margin-ratio) + 6px)),
+                linear-gradient(to bottom, #fff, #fff),
+                linear-gradient(to bottom, transparent calc(var(--line-height) - 1px), var(--blue-line-color) calc(var(--line-height) - 1px), var(--blue-line-color) var(--line-height));
+            background-size: 100% 100%, 100% calc(var(--line-height) * 3), 100% var(--line-height);
+            background-position: 0 0, 0 0, 0 0;
+            background-repeat: no-repeat, no-repeat, repeat;
+            padding-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex; flex-direction: column;
+        }
+
+        header { position: relative; height: calc(var(--line-height) * 3); width: 100%; flex-shrink: 0; }
+        .header-content {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 25px; box-sizing: border-box;
+        }
+        .main-title {
+            margin: 0; margin-left: calc(var(--left-margin-ratio) + 1.5rem); 
+            font-size: 1.5rem; font-weight: 500;
+        }
+
+        .content-wrapper { display: flex; flex-grow: 1; margin-top: var(--line-height); }
+
+        /* --- 네비게이션 --- */
+        nav { width: var(--left-margin-ratio); flex-shrink: 0; }
+        .nav-links { list-style: none; padding: 0; margin: 0; width: 100%; }
+        .nav-item, .sub-item {
+            margin: 0; padding: 0; height: var(--line-height); 
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nav-links a, .sub-item a { 
+            text-decoration: none; color: #777; font-size: 15px; transition: 0.3s; padding: 0 5px; cursor: pointer;
+            display: flex; align-items: center; height: 100%; line-height: 1;
+        }
+        .nav-links a:hover, .nav-links a.active { color: #000; font-weight: 500; }
+        .nav-links a.active { border-bottom: 1px solid #000; height: calc(var(--line-height) - 1px); }
+
+        .sub-menu { list-style: none; padding: 0; margin: 0; width: 100%; }
+        .sub-item a { font-size: 13px; color: #aaa; }
+        .sub-item a:hover, .sub-item a.active { color: #888; border-bottom: 1px solid #888 !important; height: calc(var(--line-height) - 1px); }
+
+        /* --- 본문 공통 정렬 --- */
+        .main-content { flex-grow: 1; padding: 0 40px 0 calc(20px + 6px); min-height: calc(var(--line-height) * 12); position: relative; }
+        article { display: none; width: 100%; }
+        article.active { display: block; }
+        
+        /* 중앙 정렬 전용 아티클 스타일 (Sobre mí, Contacto) */
+        article.centered-content {
+            height: 100%;
+        }
+        .center-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        p, .resume-header {
+            margin: 0; padding: 0;
+            height: var(--line-height); 
+            display: flex; align-items: center; 
+            font-size: 1rem; font-weight: 300;
+        }
+        
+        .period-text { color: var(--period-color); margin-left: 10px; font-size: 0.9rem; }
+        .period-text-sm { color: var(--period-color); margin-left: 6px; font-size: 0.85rem; }
+        .bullet-point { padding-left: 15px; position: relative; }
+        .bullet-point::before { content: "•"; position: absolute; left: 0; color: #aaa; }
+        .skip-line { height: var(--line-height); width: 100%; }
+
+        /* --- 푸터 --- */
+        footer { width: 100%; max-width: 900px; padding: 15px 0 40px 0; display: flex; justify-content: center; align-items: center; }
+        .copyright { font-size: 0.8rem; color: #aaa; letter-spacing: 0.05rem; text-align: center; }
+
+        /* --- Obras 그리드 및 모달 --- */
+        .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; padding-top: 10px; }
+        .work-item { cursor: pointer; transition: transform 0.2s; }
+        .work-item:hover { transform: translateY(-5px); }
+        .work-item img { width: 100%; height: auto; border-radius: 2px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 2000; backdrop-filter: blur(3px); }
+        .modal-window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 550px; background-color: #fff; padding: 20px 40px 40px 40px; border-radius: 2px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .modal-header { display: flex; justify-content: flex-end; margin-bottom: 5px; }
+        .close-icon { cursor: pointer; font-size: 1.8rem; color: #aaa; line-height: 1; }
+        .modal-work-title { width: 100%; text-align: center; font-size: 1.1rem; font-weight: 500; margin: 0; min-height: var(--line-height); display: flex; align-items: center; justify-content: center; }
+        .modal-divider { width: 100%; height: 1px; background-color: #eee; margin: 5px 0; }
+        .modal-meta { width: 100%; text-align: right; color: var(--period-color); font-size: 0.9rem; height: var(--line-height); display: flex; align-items: center; justify-content: flex-end; }
+        .modal-link { text-align: right; margin-top: -5px; height: var(--line-height); display: flex; align-items: center; justify-content: flex-end; }
+        .modal-link a { text-decoration: none; color: #333; font-size: 0.9rem; font-weight: 400; transition: 0.2s; }
+        .modal-link a:hover { color: #03c75a; }
+        .modal-body p { height: auto; min-height: var(--line-height); display: flex; align-items: center; text-align: left; }
+        .modal-description { display: block !important; line-height: 1.6 !important; padding-top: 10px; text-align: justify; }
+
+        @media (max-width: 768px) {
+            .legal-pad { width: 100%; margin-top: 0; background-image: linear-gradient(to right, transparent 44px, var(--red-line-color) 44px, var(--red-line-color) 46px, transparent 46px, transparent 49px, var(--red-line-color) 49px, var(--red-line-color) 51px, transparent 51px), linear-gradient(to bottom, #fff, #fff), linear-gradient(to bottom, transparent calc(var(--line-height) - 1px), var(--blue-line-color) calc(var(--line-height) - 1px), var(--blue-line-color) var(--line-height)); }
+            .main-title { margin-left: 60px; font-size: 1.3rem; }
+            .content-wrapper { flex-direction: column; margin-top: 0; }
+            nav { width: 100%; }
+            .nav-links, .sub-menu { padding-left: 60px; padding-right: 15px; display: block; }
+            .nav-item, .sub-item { display: inline-flex; margin-right: 12px; justify-content: flex-start; } 
+            .main-content { padding: 0 15px 0 60px; min-height: calc(var(--line-height) * 10); }
+            p, .resume-header, .nav-item, .sub-item { font-size: 0.85rem; height: auto; min-height: var(--line-height); }
+            .center-box { align-items: flex-start; text-align: left; } /* 모바일에서는 가독성위해 왼쪽정렬 유지하거나 취향껏 변경 가능 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="legal-pad">
+        <header>
+            <div class="header-content"><h1 class="main-title">Ina Yoon</h1></div>
+        </header>
+
+        <div class="content-wrapper">
+            <nav>
+                <ul class="nav-links">
+                    <li class="nav-item"><a onclick="showContent('about')" id="link-about" class="active">Sobre mí</a></li>
+                    <li class="nav-item"><a onclick="showContent('exp')" id="link-profile">Perfil</a></li>
+                    <ul class="sub-menu">
+                        <li class="sub-item"><a onclick="showContent('exp')" id="link-exp">Experiencia</a></li>
+                        <li class="sub-item"><a onclick="showContent('edu')" id="link-edu">Educación</a></li>
+                        <li class="sub-item"><a onclick="showContent('lang')" id="link-lang">Nivel de Idiomas</a></li>
+                        <li class="sub-item"><a onclick="showContent('awards')" id="link-awards">Premios</a></li>
+                    </ul>
+                    <li class="nav-item"><a onclick="showContent('works')" id="link-works">Obras</a></li>
+                    <li class="nav-item"><a onclick="showContent('contact')" id="link-contact">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <main class="main-content">
+                <article id="about" class="active centered-content">
+                    <div style="height: calc(var(--line-height) * 4);"></div> <div class="center-box">
+                        <p style="justify-content: center;">Escribiendo las historias que comienzan después del final</p>
+                    </div>
+                </article>
+                
+                <article id="exp">
+                    <p>como escritor <span class="period-text-sm">(19 años)</span></p>
+                    <div class="skip-line"></div>
+                    <div class="resume-header"><strong>Guionista de dramas</strong> <span class="period-text">2017 - Presente</span></div>
+                    <p>Guion del Serie de televisión JTBC ‘Alguien que puedes conocer’</p>
+                    <p class="bullet-point">Transmitido en Naver TV Cast <span class="period-text-sm">del 31 de julio al 11 de agosto de 2017</span></p>
+                    <p class="bullet-point">y especial durante Chuseok <span class="period-text-sm">el 2 de septiembre en JTBC</span></p>
+                    <div class="skip-line"></div>
+                    <div class="resume-header"><strong>Guionista de entrevistas</strong> <span class="period-text">2015 - Presente</span></div>
+                    <p>especializado en entrevistas de cine</p>
+                    <p class="bullet-point">Guionista de actor para la revista [MubMub] de CJ <span class="period-text-sm">(Ago 2017~Ene 2018)</span></p>
+                    <p class="bullet-point">Guionista de entrevistas [Conociendo al actor] para Naver V <span class="period-text-sm">(2015~Ene 2017)</span></p>
+                    <div class="skip-line"></div>
+                    <div class="resume-header"><strong>Columnista de TV, cultura popular y cine</strong> <span class="period-text">2008 - Presente</span></div>
+                    <p>Contribuciones y conferencias relacionadas en numerosos medios</p>
+                    <p class="bullet-point">Principales diarios: Korea Daily, Hankyoreh, etc.</p>
+                    <p class="bullet-point">Revistas: GQ, Harper's Bazaar, W, Cine21, PD Journal, etc.</p>
+                    <div class="skip-line"></div>
+                    <div class="resume-header"><strong>Entre otros</strong></div>
+                    <p>Planificación 및 ejecución de contenido</p>
+                    <p class="bullet-point">Podcast [Sisterhood] <span class="period-text-sm">(Oct 2018~Ene 2023)</span></p>
+                    <p class="bullet-point">Editora revista diaria SIWFF <span class="period-text-sm">(Jun 2016)</span></p>
+                    <p class="bullet-point">Reportera del diario en coreano de KOBIZ <span class="period-text-sm">(Ago 2014~May 2015)</span></p>
+                </article>
+
+                <article id="edu">
+                    <div class="resume-header"><strong>Seúl, Universidad Sungkyunkwan</strong> <span class="period-text">2002.3 – 2006.8</span></div>
+                    <p class="bullet-point">Licenciatura en Literatura y Lengua Coreana / Comunicación y Medios</p>
+                    <div class="skip-line"></div>
+                    <div class="resume-header"><strong>Cyber Hankuk University of Foreign Studies</strong> <span class="period-text">2025 – Presente</span></div>
+                    <p class="bullet-point">Licenciatura en Español <span class="period-text-sm">(transferencia, tercer año)</span></p>
+                    <p class="bullet-point"><span class="period-text-sm">* actualmente en pausa académica</span></p>
+                </article>
+
+                <article id="lang">
+                    <div class="resume-header"><strong>🇬🇧 Inglés</strong></div>
+                    <p class="bullet-point">Capaz de mantener conversaciones cotidianas</p>
+                    <p class="bullet-point">Residencia de 1 año en Brisbane, 6 meses en Melbourne <span class="period-text-sm">(visa WH)</span></p>
+                    <div class="skip-line"></div>
+                    <div class="resume-header"><strong>🇪🇸 Español</strong> <span class="period-text">Nivel A2</span></div>
+                    <p class="bullet-point">según Duolingo, más de 1200 días</p>
+                    <p class="bullet-point">capaz de mantener conversaciones básicas</p>
+                    <p class="bullet-point">capaz de leer noticias relacionadas con el fútbol</p>
+                </article>
+
+                <article id="awards">
+                    <div class="resume-header"><strong><em>🏆 Alguien que puedes conocer</em></strong></div>
+                    <div class="skip-line"></div>
+                    <p class="bullet-point"><strong>Premio de Oro</strong></p>
+                    <p style="padding-left: 15px;">en la categoría de Drama Especial de TV</p>
+                    <p style="padding-left: 15px;">en el ‘Festival Internacional de Cine de Houston’ <span class="period-text-sm">2018</span></p>
+                    <div class="skip-line"></div>
+                    <p class="bullet-point"><strong>Gran Premio</strong></p>
+                    <p style="padding-left: 15px;">en los ‘Premios del Festival Internacional de Contenidos Web de Busan’ <span class="period-text-sm">2018</span></p>
+                </article>
+
+                <article id="works">
+                    <div class="works-grid">
+                        <div class="work-item" onclick="openModal('work1')"><img src="신이떠나도-표지(띠지없음).jpg" alt="Obra 1"></div>
+                        <div class="work-item" onclick="openModal('work2')"><img src="신이떠나도-표지(띠지없음).jpg" alt="Obra 2"></div>
+                        <div class="work-item" onclick="openModal('work3')"><img src="신이떠나도-표지(띠지없음).jpg" alt="Obra 3"></div>
+                        <div class="work-item" onclick="openModal('work4')"><img src="신이떠나도-표지(띠지없음).jpg" alt="Obra 4"></div>
+                    </div>
+                </article>
+
+                <article id="contact" class="centered-content">
+                    <div style="height: calc(var(--line-height) * 2);"></div> <div class="center-box">
+                        <p style="justify-content: center;">✉️ yooninas@gmail.com</p>
+                        <p style="justify-content: center;">📱 +82 10-8861-2154</p>
+                        <p style="justify-content: center;">🏠 Seúl, Corea</p>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="copyright">© 2026 Ina Yoon. Todo empieza con una historia.</div>
+    </footer>
+
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div class="modal-header"><span class="close-icon" onclick="closeModal()">&times;</span></div>
+            <div id="modalBody" class="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        const worksData = {
+            work1: {
+                title: "<em><strong>El chamán ha desaparecido, la realidad ha entrado</strong></em>",
+                meta: "novela, Uuhee Books, 2025",
+                bullets: [
+                    "Clasificada entre las 100 mejores obras de ficción coreana en las principales librerías en línea",
+                    "N.º 1 en la lista general en tiempo real de Millie’s Library"
+                ],
+                desc: "Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado, mientras trata de proteger a su 아이."
+            },
+            work2: {
+                title: "<em><strong>El ramen nos completa</strong></em>",
+                meta: "ensayos, Semicolon Books, 2021",
+                bullets: [
+                    "Publicado en Taiwán con el título Mi momento ramen (2023)",
+                    "Derechos para el Reino Unido vendidos a Transworld (Penguin Random House), publicación prevista para 2026"
+                ],
+                desc: "Una reflexión sobre el sustento cotidiano y la vida en soledad a través del acto de cocinar fideos instantáneos."
+            },
+            work3: {
+                title: "<em><strong>Alguien que puedes conocer</strong></em>",
+                meta: "drama en dos partes, JTBC, 2017",
+                link: { text: "📺 알 수도 있는 사람", url: "https://tv.naver.com/jtbc.pymk" },
+                bullets: [],
+                desc: "Un romance con tintes de misterio en el que desbloquear el teléfono de un antiguo amante revela verdades ocultas sobre una relación pasada."
+            },
+            work4: {
+                title: "<em><strong>El diario de trabajos a tiempo parcial de la señorita Yoon</strong></em>",
+                meta: "ensayos, Miraebook, 2016",
+                bullets: [
+                    "Libro de no ficción juvenil del año (2016)",
+                    "Libro Sejong (Programa de Difusión Literaria, 2016)"
+                ],
+                desc: "Un relato sobre el trabajo precario y la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea."
+            }
+        };
+
+        function showContent(sectionId) {
+            const articles = document.querySelectorAll('.main-content article');
+            articles.forEach(art => art.classList.remove('active'));
+            const allLinks = document.querySelectorAll('nav a');
+            allLinks.forEach(link => link.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            const clickedLink = document.getElementById('link-' + sectionId);
+            if (clickedLink) clickedLink.classList.add('active');
+            if(['exp', 'edu', 'lang', 'awards'].includes(sectionId)) {
+                document.getElementById('link-profile').classList.add('active');
+            }
+        }
+
+        function openModal(id) {
+            const data = worksData[id];
+            const body = document.getElementById('modalBody');
+            let bulletHtml = data.bullets.map(b => `<p class="bullet-point">${b}</p>`).join('');
+            let linkHtml = data.link ? `<div class="modal-link"><a href="${data.link.url}" target="_blank">${data.link.text}</a></div>` : '';
+            
+            body.innerHTML = `
+                <h3 class="modal-work-title">${data.title}</h3>
+                <div class="modal-divider"></div>
+                <div class="modal-meta">${data.meta}</div>
+                ${linkHtml}
+                <div class="skip-line"></div>
+                ${bulletHtml}
+                ${data.bullets.length > 0 ? '<div class="skip-line"></div>' : ''}
+                <p class="modal-description">${data.desc}</p>
+            `;
+            document.getElementById('modalOverlay').style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+    </script>
+</body>
+</html>
