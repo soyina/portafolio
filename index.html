@@ -50,7 +50,6 @@
 
         .content-wrapper { display: flex; flex-grow: 1; margin-top: var(--line-height); }
 
-        /* --- 네비게이션 --- */
         nav { width: var(--left-margin-ratio); flex-shrink: 0; }
         .nav-links { list-style: none; padding: 0; margin: 0; width: 100%; }
         .nav-item, .sub-item {
@@ -68,29 +67,16 @@
         .sub-item a { font-size: 13px; color: #aaa; }
         .sub-item a:hover, .sub-item a.active { color: #888; border-bottom: 1px solid #888 !important; height: calc(var(--line-height) - 1px); }
 
-        /* --- 본문 공통 정렬 --- */
         .main-content { flex-grow: 1; padding: 0 40px 0 calc(20px + 6px); min-height: calc(var(--line-height) * 12); position: relative; }
         article { display: none; width: 100%; }
         article.active { display: block; }
         
-        /* 중앙 정렬 전용 아티클 스타일 (Sobre mí, Contacto) */
-        article.centered-content {
-            height: 100%;
-        }
-        .center-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            width: 100%;
-        }
+        article.centered-content { height: 100%; }
+        .center-box { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%; }
 
         p, .resume-header {
-            margin: 0; padding: 0;
-            height: var(--line-height); 
-            display: flex; align-items: center; 
-            font-size: 1rem; font-weight: 300;
+            margin: 0; padding: 0; height: var(--line-height); 
+            display: flex; align-items: center; font-size: 1rem; font-weight: 300;
         }
         
         .period-text { color: var(--period-color); margin-left: 10px; font-size: 0.9rem; }
@@ -99,15 +85,23 @@
         .bullet-point::before { content: "•"; position: absolute; left: 0; color: #aaa; }
         .skip-line { height: var(--line-height); width: 100%; }
 
-        /* --- 푸터 --- */
         footer { width: 100%; max-width: 900px; padding: 15px 0 40px 0; display: flex; justify-content: center; align-items: center; }
         .copyright { font-size: 0.8rem; color: #aaa; letter-spacing: 0.05rem; text-align: center; }
 
-        /* --- Obras 그리드 및 모달 --- */
-        .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; padding-top: 10px; }
-        .work-item { cursor: pointer; transition: transform 0.2s; }
+        /* --- Obras 2x2 그리드 수정 --- */
+        .works-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* 무조건 한 줄에 2개씩 */
+            gap: 30px; 
+            padding-top: 20px; 
+            max-width: 500px; /* 너무 퍼지지 않게 너비 제한 */
+            margin: 0 auto; 
+        }
+        .work-item { cursor: pointer; transition: transform 0.2s; width: 100%; }
         .work-item:hover { transform: translateY(-5px); }
-        .work-item img { width: 100%; height: auto; border-radius: 2px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .work-item img { width: 100%; height: auto; border-radius: 2px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+        /* --- 모달 --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 2000; backdrop-filter: blur(3px); }
         .modal-window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 550px; background-color: #fff; padding: 20px 40px 40px 40px; border-radius: 2px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         .modal-header { display: flex; justify-content: flex-end; margin-bottom: 5px; }
@@ -130,7 +124,8 @@
             .nav-item, .sub-item { display: inline-flex; margin-right: 12px; justify-content: flex-start; } 
             .main-content { padding: 0 15px 0 60px; min-height: calc(var(--line-height) * 10); }
             p, .resume-header, .nav-item, .sub-item { font-size: 0.85rem; height: auto; min-height: var(--line-height); }
-            .center-box { align-items: flex-start; text-align: left; } /* 모바일에서는 가독성위해 왼쪽정렬 유지하거나 취향껏 변경 가능 */
+            .center-box { align-items: flex-start; text-align: left; }
+            .works-grid { max-width: 100%; gap: 15px; } /* 모바일에서도 2줄 유지되도록 gap만 조정 */
         }
     </style>
 </head>
@@ -159,7 +154,8 @@
 
             <main class="main-content">
                 <article id="about" class="active centered-content">
-                    <div style="height: calc(var(--line-height) * 4);"></div> <div class="center-box">
+                    <div style="height: calc(var(--line-height) * 4);"></div>
+                    <div class="center-box">
                         <p style="justify-content: center;">Escribiendo las historias que comienzan después del final</p>
                     </div>
                 </article>
@@ -183,7 +179,7 @@
                     <p class="bullet-point">Revistas: GQ, Harper's Bazaar, W, Cine21, PD Journal, etc.</p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Entre otros</strong></div>
-                    <p>Planificación 및 ejecución de contenido</p>
+                    <p>Planificación y ejecución de contenido</p>
                     <p class="bullet-point">Podcast [Sisterhood] <span class="period-text-sm">(Oct 2018~Ene 2023)</span></p>
                     <p class="bullet-point">Editora revista diaria SIWFF <span class="period-text-sm">(Jun 2016)</span></p>
                     <p class="bullet-point">Reportera del diario en coreano de KOBIZ <span class="period-text-sm">(Ago 2014~May 2015)</span></p>
@@ -191,7 +187,7 @@
 
                 <article id="edu">
                     <div class="resume-header"><strong>Seúl, Universidad Sungkyunkwan</strong> <span class="period-text">2002.3 – 2006.8</span></div>
-                    <p class="bullet-point">Licenciatura en Literatura y Lengua Coreana / Comunicación y Medios</p>
+                    <p class="bullet-point">Licenciatura en Literatura y Lengua Coreana / Comunicación 및 Medios</p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Cyber Hankuk University of Foreign Studies</strong> <span class="period-text">2025 – Presente</span></div>
                     <p class="bullet-point">Licenciatura en Español <span class="period-text-sm">(transferencia, tercer año)</span></p>
@@ -230,7 +226,8 @@
                 </article>
 
                 <article id="contact" class="centered-content">
-                    <div style="height: calc(var(--line-height) * 2);"></div> <div class="center-box">
+                    <div style="height: calc(var(--line-height) * 2);"></div>
+                    <div class="center-box">
                         <p style="justify-content: center;">✉️ yooninas@gmail.com</p>
                         <p style="justify-content: center;">📱 +82 10-8861-2154</p>
                         <p style="justify-content: center;">🏠 Seúl, Corea</p>
@@ -256,19 +253,13 @@
             work1: {
                 title: "<em><strong>El chamán ha desaparecido, la realidad ha entrado</strong></em>",
                 meta: "novela, Uuhee Books, 2025",
-                bullets: [
-                    "Clasificada entre las 100 mejores obras de ficción coreana en las principales librerías en línea",
-                    "N.º 1 en la lista general en tiempo real de Millie’s Library"
-                ],
-                desc: "Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado, mientras trata de proteger a su 아이."
+                bullets: ["Clasificada entre las 100 mejores obras de ficción coreana", "N.º 1 en la lista general en tiempo real de Millie’s Library"],
+                desc: "Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado."
             },
             work2: {
                 title: "<em><strong>El ramen nos completa</strong></em>",
                 meta: "ensayos, Semicolon Books, 2021",
-                bullets: [
-                    "Publicado en Taiwán con el título Mi momento ramen (2023)",
-                    "Derechos para el Reino Unido vendidos a Transworld (Penguin Random House), publicación prevista para 2026"
-                ],
+                bullets: ["Publicado en Taiwán (2023)", "Derechos vendidos a Transworld (Penguin Random House)"],
                 desc: "Una reflexión sobre el sustento cotidiano y la vida en soledad a través del acto de cocinar fideos instantáneos."
             },
             work3: {
@@ -276,16 +267,13 @@
                 meta: "drama en dos partes, JTBC, 2017",
                 link: { text: "📺 알 수도 있는 사람", url: "https://tv.naver.com/jtbc.pymk" },
                 bullets: [],
-                desc: "Un romance con tintes de misterio en el que desbloquear el teléfono de un antiguo amante revela verdades ocultas sobre una relación pasada."
+                desc: "Un romance con tintes de misterio en el que desbloquear el teléfono de un antiguo amante revela verdades ocultas."
             },
             work4: {
                 title: "<em><strong>El diario de trabajos a tiempo parcial de la señorita Yoon</strong></em>",
                 meta: "ensayos, Miraebook, 2016",
-                bullets: [
-                    "Libro de no ficción juvenil del año (2016)",
-                    "Libro Sejong (Programa de Difusión Literaria, 2016)"
-                ],
-                desc: "Un relato sobre el trabajo precario y la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea."
+                bullets: ["Libro de no ficción juvenil del año (2016)", "Libro Sejong (2016)"],
+                desc: "Un relato sobre el trabajo precario 및 la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea."
             }
         };
 
