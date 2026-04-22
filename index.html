@@ -21,6 +21,7 @@
             display: flex; flex-direction: column; align-items: center; min-height: 100vh;
         }
 
+        /* --- 리갈 패드 배경 --- */
         .legal-pad {
             width: 95%; max-width: 900px; background-color: #fff;
             margin-top: 20px; position: relative;
@@ -42,11 +43,12 @@
             display: flex; align-items: center; padding-top: 25px; box-sizing: border-box;
         }
         .main-title {
-            margin: 0; margin-left: calc(var(--left-margin-ratio) + 1rem); 
+            margin: 0; margin-left: calc(var(--left-margin-ratio) + 1.2rem); 
             font-size: 1.5rem; font-weight: 500;
         }
 
-        .content-wrapper { display: flex; flex-direction: row !important; flex-grow: 1; margin-top: var(--line-height); }
+        /* [중요] 모바일 좌우 2단 레이아웃 강제 고정 */
+        .content-wrapper { display: flex; flex-direction: row !important; flex-grow: 1; margin-top: var(--line-height); width: 100%; }
 
         nav { width: var(--left-margin-ratio); flex-shrink: 0; }
         .nav-links { list-style: none; padding: 0; margin: 0; width: 100%; }
@@ -65,6 +67,7 @@
         .sub-item a { font-size: 12px; color: #aaa; }
         .sub-item a:hover, .sub-item a.active { color: #888; border-bottom: 1px solid #888 !important; height: calc(var(--line-height) - 1px); }
 
+        /* --- 본문 (모바일에서 글자 크기 최적화) --- */
         .main-content { flex-grow: 1; padding: 0 20px 0 15px; min-height: calc(var(--line-height) * 18); position: relative; }
         article { display: none; width: 100%; }
         article.active { display: block; }
@@ -75,7 +78,7 @@
             display: flex; align-items: center; 
             font-size: 1rem; font-weight: 300;
             line-height: var(--line-height);
-            word-break: break-word; /* 모바일 대응: 단어 단위 줄바꿈 */
+            word-break: break-word; 
         }
         
         .period-text { color: var(--period-color); margin-left: 10px; font-size: 0.9rem; }
@@ -84,6 +87,7 @@
         .bullet-point::before { content: "•"; position: absolute; left: 0; color: #aaa; }
         .skip-line { height: var(--line-height); width: 100%; }
 
+        /* --- Obras 2x2 그리드 --- */
         .works-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding-top: 15px; }
         .work-item { cursor: pointer; transition: transform 0.2s; }
         .work-item img { width: 100%; height: auto; border-radius: 2px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
@@ -91,6 +95,7 @@
         footer { width: 100%; max-width: 900px; padding: 15px 0 40px 0; display: flex; justify-content: center; }
         .copyright { font-size: 0.8rem; color: #aaa; text-align: center; }
 
+        /* --- 모달 --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 2000; backdrop-filter: blur(3px); }
         .modal-window { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 550px; background-color: #fff; padding: 20px 30px 40px 30px; border-radius: 2px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         .modal-header { display: flex; justify-content: flex-end; margin-bottom: 5px; }
@@ -103,9 +108,9 @@
         @media (max-width: 768px) {
             :root { --left-margin-ratio: 30%; }
             .main-title { font-size: 1.2rem; }
-            .nav-links a { font-size: 11px; }
-            .sub-item a { font-size: 9px; }
-            p, .resume-header { font-size: 0.8rem; }
+            .nav-links a { font-size: 12px; }
+            .sub-item a { font-size: 10px; }
+            p, .resume-header { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -250,7 +255,7 @@
             work4: { 
                 title: "<em><strong>El diario de trabajos a tiempo parcial de la señorita Yoon</strong></em>", 
                 meta: "ensayos, Miraebook, 2016", 
-                desc: "Libro de no ficción juvenil del año (2016). Libro Sejong (Programa de Difusión Literaria, 2016). <br><br> Un relato sobre el trabajo precario 및 la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
+                desc: "Libro de no ficción juvenil del año (2016). Libro Sejong (Programa de Difusión Literaria, 2016). <br><br> Un relato sobre el trabajo precario y la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
             }
         };
 
