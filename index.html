@@ -69,34 +69,21 @@
         article { display: none; width: 100%; }
         article.active { display: block; }
 
-        /* --- Experiencia 정렬 핵심 수정 --- */
-        #exp p, #exp .resume-header {
-            margin: 0 !important; 
-            padding: 0 !important;
-            height: var(--line-height) !important; 
-            min-height: var(--line-height) !important;
-            max-height: var(--line-height) !important;
-            display: flex !important; 
-            align-items: center !important; 
-            font-size: 1rem; font-weight: 300;
-            line-height: 1 !important; /* 텍스트가 칸 중앙에 오도록 고정 */
-            box-sizing: border-box;
-            overflow: visible;
-        }
-        
-        /* 공통 스타일 유지 */
+        /* 자연스러운 줄바꿈을 위한 설정 */
         p, .resume-header {
             margin: 0; padding: 0;
-            height: var(--line-height); 
+            min-height: var(--line-height); 
             display: flex; align-items: center; 
             font-size: 1rem; font-weight: 300;
             line-height: var(--line-height);
+            word-break: keep-all; 
+            flex-wrap: wrap; /* 내용이 길면 다음 줄로 */
         }
         
         .period-text { color: var(--period-color); margin-left: 10px; font-size: 0.9rem; }
         .period-text-sm { color: var(--period-color); margin-left: 6px; font-size: 0.85rem; }
-        .bullet-point { padding-left: 15px; position: relative; display: flex; align-items: center; }
-        .bullet-point::before { content: "•"; position: absolute; left: 0; color: #aaa; }
+        .bullet-point { padding-left: 15px; position: relative; display: flex; align-items: flex-start; }
+        .bullet-point::before { content: "•"; position: absolute; left: 0; color: #aaa; top: 0; }
         .skip-line { height: var(--line-height); width: 100%; display: block; }
 
         .works-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding-top: 15px; }
@@ -175,34 +162,39 @@
                     <p class="bullet-point">Guionista de [Conociendo al actor] para Naver V <span class="period-text-sm">(2015 - Ene 2017)</span></p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Columnista de TV y cine</strong> <span class="period-text">2008 - Presente</span></div>
-                    <p>Contribuciones 및 conferencias en numerosos medios</p>
+                    <p>Contribuciones y conferencias en numerosos medios</p>
                     <p class="bullet-point">Diarios: Korea Daily, Hankyoreh, etc.</p>
                     <p class="bullet-point">Revistas: GQ, Harper's Bazaar, W, Cine21, PD Journal, etc.</p>
                     <div class="skip-line"></div>
                     <div class="resume-header"><strong>Entre otros</strong></div>
-                    <p>Planificación y ejecución de contenido, entre otras experiencias</p>
+                    <p>Planificación 및 ejecución de contenido, entre otras experiencias</p>
                     <p class="bullet-point">Planificación, producción y presentación del podcast [Sisterhood] <span class="period-text-sm">Octubre 2018 ~ Enero 2023</span></p>
-                    <p class="bullet-point">Editora de la revista diaria del SIWFF <span class="period-text-sm">Junio 2016</span></p>
-                    <p class="bullet-point">Reportera encargada del diario en coreano de KOBIZ <span class="period-text-sm">Agosto 2014 ~ Mayo 2015</span></p>
+                    <p class="bullet-point">Editora de la revista diaria del Festival Internacional de Cine de Mujeres de Seúl SIWFF <span class="period-text-sm">Junio 2016</span></p>
+                    <p class="bullet-point">Reportera encargada del diario en coreano de KOBIZ del Consejo de Cine de Corea <span class="period-text-sm">Agosto 2014 ~ Mayo 2015</span></p>
                 </article>
 
                 <article id="edu">
-                    <div class="resume-header"><strong>Univ. Sungkyunkwan, Seúl</strong> <span class="period-text">2002.3 – 2006.8</span></div>
-                    <p class="bullet-point">Grado en Literatura Coreana / Comunicación 및 Medios</p>
+                    <div class="resume-header"><strong>Seúl, Universidad Sungkyunkwan</strong> <span class="period-text">2002.3 - 2006.8</span></div>
+                    <p class="bullet-point">Licenciatura en Literatura y Lengua Coreana / Comunicación y Medios</p>
                     <div class="skip-line"></div>
-                    <div class="resume-header"><strong>Cyber Univ. of Foreign Studies</strong> <span class="period-text">2025 – Presente</span></div>
-                    <p class="bullet-point">Grado en Español <span class="period-text-sm">(transferencia, 3er año)</span></p>
-                    <p class="bullet-point"><span class="period-text-sm">* actualmente en excedencia académica</span></p>
+                    <div class="resume-header"><strong>Universidad Cibernética de Estudios Extranjeros de Corea</strong> <span class="period-text">2025 – Presente</span></div>
+                    <p class="bullet-point">Licenciatura en Lengua y Literatura Españolas (Ingreso en 3.er año)</p>
+                    <p class="bullet-point">Actualmente en suspensión temporal de estudios</p>
                 </article>
 
                 <article id="lang">
-                    <div class="resume-header"><strong>🇬🇧 Inglés</strong></div>
-                    <p class="bullet-point">Conversación fluida</p>
-                    <p class="bullet-point">Residencia de 1.5 años en Australia <span class="period-text-sm">(WHV)</span></p>
+                    <p><strong>Coreano</strong></p>
+                    <p>lengua materna</p>
                     <div class="skip-line"></div>
-                    <div class="resume-header"><strong>🇪🇸 Español</strong> <span class="period-text">Nivel A2</span></div>
-                    <p class="bullet-point">Más de 1,200 días en Duolingo</p>
-                    <p class="bullet-point">Capaz de mantener conversaciones básicas</p>
+                    <p><strong>Inglés</strong></p>
+                    <p class="bullet-point">Capaz de mantener conversaciones cotidianas</p>
+                    <p class="bullet-point">Residencia de un año en Brisbane y seis meses en Melbourne</p>
+                    <p style="padding-left:15px;"><span class="period-text-sm">con visa de vacaciones y trabajo</span></p>
+                    <p class="bullet-point">IELTS 6.5</p>
+                    <div class="skip-line"></div>
+                    <p><strong>Español</strong> <span class="period-text-sm">Nivel A2</span></p>
+                    <p class="bullet-point">según Duolingo, más de 1200 días</p>
+                    <p class="bullet-point">capaz de mantener conversaciones básicas, capaz de leer noticias relacionadas con el fútbol</p>
                 </article>
 
                 <article id="awards">
@@ -253,8 +245,8 @@
             work1: { 
                 title: "<em><strong>El chamán ha desaparecido, la realidad ha entrado</strong></em>", 
                 meta: "novela, Uuhee Books, 2025", 
-                points: ["Clasificada entre las 100 mejores obras de ficción coreana.", "N.º 1 en la lista general en tiempo real de Millie’s Library."],
-                desc: "Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado." 
+                points: ["Clasificada entre las 100 mejores obras de ficción coreana en las principales librerías en línea.", "N.º 1 en la lista general en tiempo real de Millie’s Library."],
+                desc: "Tras perder sus poderes divinos de la noche a la mañana, un chamán antes célebre intenta recuperar su lugar expulsando a los residentes de un complejo de apartamentos embrujado, mientras trata de proteger a su hija." 
             },
             work2: { 
                 title: "<em><strong>El ramen nos completa</strong></em>", 
@@ -272,7 +264,7 @@
                 title: "<em><strong>El diario de trabajos a tiempo parcial de la señorita Yoon</strong></em>", 
                 meta: "ensayos, Miraebook, 2016", 
                 points: ["Libro de no ficción juvenil del año (2016).", "Libro Sejong (Programa de Difusión Literaria, 2016)."],
-                desc: "Un relato sobre el trabajo precario y la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
+                desc: "Un relato sobre el trabajo precario 및 la supervivencia como freelance, que retrata la vida de la generación de “freeters” en Corea." 
             }
         };
 
